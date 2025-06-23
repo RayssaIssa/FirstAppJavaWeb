@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <title>Gerenciador de Alunos e Disciplinas</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+<body>
+    <h1>Gerenciador de Alunos e Disciplinas</h1>
+
+    <div class="container">
+
+        <!-- Seção Aluno -->
+        <div class="section">
+            <h2>Adicionar Aluno</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <input type="text" id="nomeAluno" placeholder="Nome" />
+                    <input type="email" id="emailAluno" placeholder="Email" />
+                    <input type="text" id="matriculaAluno" placeholder="Matrícula" />
+                    <input type="text" id="cursoAluno" placeholder="Curso" />
+                    <button onclick="adicionarAluno()">Adicionar</button>
+                    <div class="mensagem" id="mensagemAluno"></div>
+                    <button onclick="listarAlunos()">Listar Todos Alunos</button>
+                </div>
+                <div class="table-container">
+                    <table id="tabelaAlunos">
+                        <thead>
+                            <tr>
+                                <th>ID</th><th>Nome</th><th>Email</th><th>Matrícula</th><th>Curso</th><th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção Disciplina -->
+        <div class="section">
+            <h2>Adicionar Disciplina</h2>
+            <div class="form-grid">
+                <div class="form-group">
+                    <input type="text" id="nomeDisciplina" placeholder="Nome" />
+                    <input type="text" id="cargaHorariaDisciplina" placeholder="Carga Horária" />
+                    <button onclick="adicionarDisciplina()">Adicionar</button>
+                    <div class="mensagem" id="mensagemDisciplina"></div>
+                    <button onclick="listarDisciplinas()">Listar Todas Disciplinas</button>
+                </div>
+                <div class="table-container">
+                    <table id="tabelaDisciplinas">
+                        <thead>
+                            <tr>
+                                <th>ID</th><th>Nome</th><th>Carga Horária</th><th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

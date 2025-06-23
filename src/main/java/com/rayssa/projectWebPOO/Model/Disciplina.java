@@ -1,80 +1,97 @@
 package com.rayssa.projectWebPOO.Model;
 
-import jakarta.persistence.*;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Entity
-@Table(name = "DISCIPLINA")
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
+
+@Entity 
+@Table(name="DISCIPLINAS")
 public class Disciplina {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "disciplina_id")
-    private Integer id;
+	@Id // fala que é uma chave primária
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "disciplina_id")
+	private Integer id;
+	
+	@Column(name = "nome_disciplina", nullable = false)
+	private String nome;
+	
+	private Integer carga_horaria;
 
-    @Column(name = "nome_disciplina", nullable = false)
-    private String nome;
+	//Junção de tabelas entre disciplina e alunos
+	@ManyToMany
+	@JoinTable(name="DISCIPLINAS_ALUNOS",
+			joinColumns = @JoinColumn(name = "disciplina_id"),
+			inverseJoinColumns = @JoinColumn(name = "aluno_id"))
 
-    private Integer cargaHoraria;
-
-    @ManyToMany
-    @JoinTable(name = "DISCIPLINAS_ALUNOS", joinColumns = @JoinColumn(name = "disciplina_id"), inverseJoinColumns = @JoinColumn(name = "aluno_id"))
-    private List<Aluno> alunos = new ArrayList<>();
-
-    Disciplina(){}
-
-    Disciplina(Integer id, String nome, Integer cargaHoraria){
-        super();
-        this.id = id;
-        this.nome = nome;
-        this.cargaHoraria = cargaHoraria;
+	private List<Aluno> alunos = new ArrayList<>();
+	
+    public Disciplina() {
+    	
     }
+    
+	public Disciplina(Integer id, String nome, Integer carga_horaria) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.carga_horaria = carga_horaria;
+	}
 
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Disciplina that = (Disciplina) o;
-        return Objects.equals(id, that.id) && Objects.equals(nome, that.nome) && Objects.equals(cargaHoraria, that.cargaHoraria) && Objects.equals(alunos, that.alunos);
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    //Gets e Sets
+	public String getNome() {
+		return nome;
+	}
 
-    public Integer getId() {
-        return id;
-    }
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getCarga_horaria() {
+		return carga_horaria;
+	}
 
-    public String getNome() {
-        return nome;
-    }
+	public void setCarga_horaria(Integer carga_horaria) {
+		this.carga_horaria = carga_horaria;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public List<Aluno> getAlunos() {
+		return alunos;
+	}
 
-    public Integer getCargaHoraria() {
-        return cargaHoraria;
-    }
+	public void setAlunos(List<Aluno> alunos) {
+		this.alunos = alunos;
+	}
 
-    public void setCargaHoraria(Integer cargaHoraria) {
-        this.cargaHoraria = cargaHoraria;
-    }
+	@Override
+	public int hashCode() {
+		return Objects.hash(id);
+	}
 
-    public List<Aluno> getAlunos() {
-        return alunos;
-    }
-
-    public void setAlunos(List<Aluno> alunos) {
-        this.alunos = alunos;
-    }
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Disciplina other = (Disciplina) obj;
+		return Objects.equals(id, other.id);
+	}
 }
